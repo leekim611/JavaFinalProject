@@ -1,5 +1,6 @@
 package combiningcoursedata;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.apache.commons.cli.CommandLine;
@@ -16,8 +17,6 @@ public class CombiningCourseDataProgram {
 	private String input;	// save data.zip path
 	private String output;	// save result.csv or result.xls path
 	private boolean help;	// helpPrint
-	private ArrayList<String> fileNames;	// save file's path after unzipping data.zip
-	
 	
 	public void run(String[] args) {
 		Options options = MakeOptions.createOptions();
@@ -27,12 +26,10 @@ public class CombiningCourseDataProgram {
 				return;
 			}
 			try {
-				fileNames = Zip.Unzip(input);
-				ArrayList<String> tempFileNames = new ArrayList<String>();
-				tempFileNames = (ArrayList<String>) fileNames.clone();
-				for (String fileName : tempFileNames) {
-					//fileNames = Zip.Unzip(fileName);
-				}
+				File relativePath = new File("data.zip");
+				File absolutePath = new File(relativePath.getAbsolutePath());
+				Zip.unzip(absolutePath);
+				Zip.unzip(new File("C:\\git\\JavaFinalProject\\hi.zip"));
 			} catch (Throwable e) {
 				e.printStackTrace();
 			}
