@@ -13,10 +13,11 @@ import combiningcoursedata.zip.Zip;
 
 public class CombiningCourseDataProgram {
 	
-	private String input;
-	private String output;
-	private boolean help;
-	private ArrayList<String> fileNames;
+	private String input;	// save data.zip path
+	private String output;	// save result.csv or result.xls path
+	private boolean help;	// helpPrint
+	private ArrayList<String> fileNames;	// save file's path after unzipping data.zip
+	
 	
 	public void run(String[] args) {
 		Options options = MakeOptions.createOptions();
@@ -27,6 +28,11 @@ public class CombiningCourseDataProgram {
 			}
 			try {
 				fileNames = Zip.Unzip(input);
+				ArrayList<String> tempFileNames = new ArrayList<String>();
+				tempFileNames = (ArrayList<String>) fileNames.clone();
+				for (String fileName : tempFileNames) {
+					//fileNames = Zip.Unzip(fileName);
+				}
 			} catch (Throwable e) {
 				e.printStackTrace();
 			}

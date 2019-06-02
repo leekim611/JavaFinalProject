@@ -12,9 +12,12 @@ public class Zip {
 	public static ArrayList<String> Unzip(String input) throws Throwable {
 		ArrayList<String> fileNames = new ArrayList<String>();
 		
-		String zipFileName = input;
-		String directory = "a";
-		File zipFile = new File(zipFileName);
+		String zipFilePath = input;
+		File zipFile = new File(zipFilePath);
+		String motherPath = zipFile.getParent();
+		String zipFileName = zipFile.getName();
+		zipFileName = zipFileName.replace('.', ' ');
+		String directory = zipFileName.split(" ")[0];
 		FileInputStream fis = null;
 		ZipInputStream zis = null;
 		ZipEntry zipEntry = null;
@@ -30,7 +33,7 @@ public class Zip {
 				}
 				else {
 					createFile(file, zis);
-					fileNames.add(file.getName());
+					fileNames.add(motherPath + "\\" + directory + "\\" + file.getName());
 				}
 			}
 		} catch (Throwable e) {
