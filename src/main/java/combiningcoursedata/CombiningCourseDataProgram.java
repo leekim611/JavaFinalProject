@@ -1,6 +1,7 @@
 package combiningcoursedata;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.commons.cli.CommandLine;
@@ -20,7 +21,7 @@ public class CombiningCourseDataProgram {
 	private ArrayList<String> fileNames;	// save file's path after unzipping data.zip
 	
 	
-	public void run(String[] args) {
+	public void run(String[] args) throws IOException {
 		Options options = MakeOptions.createOptions();
 		if (parseOptions(options, args)) {
 			if (help) {
@@ -34,6 +35,8 @@ public class CombiningCourseDataProgram {
 			 * 그럼 그 아래 zip파일들이 나오겠죠?
 			 * 또 이 zip파일을 풀어야해요
 			 * 쪼르륵 다 풀다보면 어떻게 파일이 생성이 될까요?
+			 * 
+			 * ******************************** commons-compress 를 사용하기로 했어요 ****************
 			 * 
 			 * data folder -> 0001.zip ~ 0005.zip
 			 * 			   -> 0001 folder -> 통일뭐시기1, 통일뭐시기2
@@ -129,6 +132,8 @@ public class CombiningCourseDataProgram {
 			 * 이게 참...
 			 * 저는 모르겠어요 화이팅
 			 */
+			File file = new File(input);
+			Zip.unzip(file);
 		}
 	}
 	
