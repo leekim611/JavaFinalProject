@@ -38,4 +38,8 @@ dependencies {
 	
 	// https://mvnrepository.com/artifact/org.apache.commons/commons-compress
 	compile group: 'org.apache.commons', name: 'commons-compress', version: '1.18'
+	
+	// https://mvnrepository.com/artifact/jazzlib/jazzlib
+	compile group: 'jazzlib', name: 'jazzlib', version: '0.0.7'
+	
 }

@@ -31,7 +31,7 @@ public class MakeOptions {
 		
 		return options;
 	}
-	public static void printHelp(Options options) {
+	public  static void printHelp(Options options) {
 		HelpFormatter formatter = new HelpFormatter();
 		String header = "HGU Combining Course Data";
 		String footer = "";
