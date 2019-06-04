@@ -11,6 +11,7 @@ import org.apache.commons.cli.Options;
 
 import combiningcoursedata.option.MakeOptions;
 import combiningcoursedata.zip.Zip;
+import combiningcoursedata.filedata.ReadExcel;
 import combiningcoursedata.filedata.UnzippedExcelDataFile;
 
 
@@ -41,7 +42,8 @@ public class CombiningCourseDataProgram {
         	ArrayList<String> finalPath = new ArrayList<String>();
         	files.setFinalPath(finalPath);
         	UnzippedExcelDataFile.settingFinalPath(startDir, finalPath);  // save all xlsx files absolute path
-        	
+
+        	ReadExcel.readExcel(finalPath, absolutePath.getParent());
 		}
 	}
 	
