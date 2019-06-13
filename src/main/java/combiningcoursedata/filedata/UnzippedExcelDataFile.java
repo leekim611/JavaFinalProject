@@ -3,11 +3,12 @@ package combiningcoursedata.filedata;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.commons.io.FilenameUtils;
 
 public class UnzippedExcelDataFile {
-	public ArrayList<String> finalPath;
+	private ArrayList<String> finalPath;
 	
 	public static void settingFinalPath(String startDir, ArrayList<String> finalPath){
 		File directory = new File(startDir);

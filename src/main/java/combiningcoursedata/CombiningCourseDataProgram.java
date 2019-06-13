@@ -3,6 +3,7 @@ package combiningcoursedata;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -20,6 +21,7 @@ public class CombiningCourseDataProgram {
 	private String input;	// save data.zip path
 	private String output;	// save result.csv or result.xls path
 	private boolean help;	// helpPrint
+	private HashMap<String, ArrayList<String>> totalMerge;
 	
 	public void run(String[] args) throws IOException {
 		Options options = MakeOptions.createOptions();
@@ -28,8 +30,10 @@ public class CombiningCourseDataProgram {
 				MakeOptions.printHelp(options);
 				return;
 			}
+			
 			File file = new File(input);
 			Zip.unzip(file);
+			
 			// get C:\git\JavaFinalProject\data start
 			String fileFullName = file.getName();
         	int index = fileFullName.lastIndexOf(".");
@@ -38,12 +42,21 @@ public class CombiningCourseDataProgram {
         	File saveDir = new File(absolutePath.getParent() + "\\" + fileName);
         	String startDir = saveDir.getAbsolutePath();
         	// get C:\git\JavaFinalProject\data end
+        	
         	UnzippedExcelDataFile files = new UnzippedExcelDataFile();
         	ArrayList<String> finalPath = new ArrayList<String>();
         	files.setFinalPath(finalPath);
         	UnzippedExcelDataFile.settingFinalPath(startDir, finalPath);  // save all xlsx files absolute path
-
-        	ReadExcel.readExcel(finalPath, absolutePath.getParent());
+        	
+        	String errorCSVPath = System.getProperty("user.dir");
+        	ReadExcel.readExcel(finalPath, errorCSVPath);
+        	ReadExcel ire = new ReadExcel();
+        	ire.setHeader(finalPath);
+        	ArrayList<String> header = ire.getCSVHeader();
+        	
+        	for (String str : header) {
+        		// System.out.println(str);
+        	}
 		}
 	}
 	
